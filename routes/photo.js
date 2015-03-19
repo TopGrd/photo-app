@@ -10,10 +10,6 @@ var path = require('path');
 var join = path.join;
 
 var photos = [];
-exports.list = function(req, res){ res.render('photos', {
-    title: 'Photos',
-    photos: photos });
-};
 exports.list = function (req, res, next) {
     /*res.render('photos',{
         title:'Photos',
