@@ -7,14 +7,14 @@ var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
-var photo = require('./routes/photo');
+var photos = require('./routes/photos');
 
 var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-app.set('photos',__dirname+'/pubic/photos');
+
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(__dirname + '/public/favicon.ico'));
@@ -23,9 +23,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.set('photos',__dirname+'/pubic/photos');
 
-app.use('/', photo.list);
-app.use('/upload',photo.form);
+app.use('/', photos.list);
+app.use('/upload',photos.form);
+app.use('/upload',photos.submit(app.get('photos')));
 app.use('/users', users);
 
 // catch 404 and forward to error handler

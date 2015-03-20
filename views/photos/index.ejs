@@ -3,17 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <title><%= title %></title>
-    <link rel="stylesheet" href="/public/stylesheets/style.css"/>
+    <link rel="stylesheet" href="/stylesheets/style.css"/>
 </head>
 <body>
     <h1>Photos</h1>
     <p>Application For Photos</p>
     <div id="photos">
-        <% photos.forEach(function (photo) { %>
-        <div class="photo"></div>
-        <h2><%= photo.name%></h2>
-        <img src="/photos/<%= photo.path %>" alt=""/>
-        <% }) %>
+        <% for(var i =0;i<photos.length;i++) {%>
+        <div class="photo">
+        <h2><%= photos[i].name%></h2>
+        <img src="<%= photos[i].path %>" alt=""/>
+        </div>
+        <% } %>
     </div>
 </body>
 </html>
