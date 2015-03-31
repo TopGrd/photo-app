@@ -10,41 +10,21 @@ var fs = require('fs');
 var path = require('path');
 var join = path.join;
 var photos = [];
-
-var options = {
-    host:'api.douban.com',
-    port:80,
-    path:'/v2/movie/us_box'
-};
 var data = '';
 var str = '';
-http.get(options,function(res){
-    res.on('data',function(chunck){
-        data += chunck;
-    });
-    res.on('end',function(){
-        str = JSON.parse(data);
-        for(var i= 0; i<str.subjects.length;i++){
-            var arr = {};
-            arr.name=str.subjects[i].subject.title;
-            arr.path= str.subjects[i].subject.images.large;
-            photos.push(arr);
-        }
-    })
-});
 
 exports.list = function (req, res, next) {
     res.render('photos',{
         title:'Photos',
         photos:photos
     });
-    /*Photo.find({},function(err,photos){
+    Photo.find({},function(err,photos){
         if(err) return next(err);
         res.render('photos',{
             title:'Photos',
             photos:photos
         })
-    })*/
+    })
 };
 exports.form = function(req,res){
     res.render('photos/upload',{
